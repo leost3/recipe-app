@@ -5,7 +5,13 @@
 </div>
 <div class="row">
   <div class="col-cs-12">
-    <h1>Recipe Name</h1>
+    <ng-template #recipeName>
+      <h1>Recipe Name</h1>
+    </ng-template>
+
+    <h1 *ngIf="recipe; else recipeName">
+      {{ recipe.name }}
+    </h1>
   </div>
 </div>
 <div class="row">
@@ -24,8 +30,13 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    Description
+  <ng-template #recipeDesc>
+    <div class="col-xs-12">
+      Description
+    </div>
+  </ng-template>
+  <div *ngIf="recipe; else recipeDesc" class="col-xs-12">
+    {{ recipe.description }}
   </div>
 </div>
 <div class="row">
