@@ -1,3 +1,5 @@
+import { ShoppingListService } from './../shopping-list/shopping-list.service';
+import { Ingredient } from './../shared/ingredient.model';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
 
@@ -6,22 +8,29 @@ import { Recipe } from './recipe.model';
 })
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+  sendIngredientsToShoppingList = new EventEmitter<Ingredient[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
-      'A test Recipe',
-      'This is a test',
-      'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1035&q=80'
+      'Tasty veggie stuff',
+      'delicious green thing',
+      'https://images.unsplash.com/photo-1468777675496-5782faaea55b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80',
+      [new Ingredient('tomatoes', 20), new Ingredient('potatoes', 5)]
     ),
     new Recipe(
-      'Anothercipe',
-      'This is anotjer test',
-      'https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
+      'Super Bacon Burger',
+      'Tasty baconator mega burger',
+      'https://images.unsplash.com/photo-1547584370-2cc98b8b8dc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80',
+      [new Ingredient('bacon', 10), new Ingredient('chicken', 5)]
     )
   ];
-  constructor() {}
+  constructor(private shoppingListService: ShoppingListService) {}
 
   getRecipes() {
     return [...this.recipes];
+  }
+
+  addIngredientsToShoppingList(ingredient: Ingredient[]) {
+    this.shoppingListService.addIngredients(ingredient);
   }
 }
