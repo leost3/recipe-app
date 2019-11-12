@@ -9,7 +9,6 @@
     <app-recipe-item
       *ngFor="let recipe of recipes"
       [myRecipes]="recipe"
-      (sendRecipes)="getRecipes($event)"
     ></app-recipe-item>
   </div>
 </div>
