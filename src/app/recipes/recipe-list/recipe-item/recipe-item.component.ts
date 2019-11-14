@@ -1,18 +1,21 @@
-import { RecipeService } from '../../recipe.service';
-import { Recipe } from './../../recipe.model';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { RecipeService } from "../../recipe.service";
+import { Recipe } from "./../../recipe.model";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-recipe-item',
-  templateUrl: './recipe-item.component.html',
-  styleUrls: ['./recipe-item.component.css']
+  selector: "app-recipe-item",
+  templateUrl: "./recipe-item.component.html",
+  styleUrls: ["./recipe-item.component.css"]
 })
 export class RecipeItemComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
-  @Input('myRecipes') recipe: Recipe;
+  @Input("myRecipes") recipe: Recipe;
+  @Input() index: number;
+
   ngOnInit() {}
 
   onClick() {
-    this.recipeService.recipeSelected.emit(this.recipe);
+    console.log(this.recipe);
+    // this.recipeService.recipeSelected.emit(this.recipe);
   }
 }
