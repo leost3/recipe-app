@@ -1,3 +1,4 @@
+import { ShoppingListService } from "./../../shopping-list/shopping-list.service";
 import { Recipe } from "./../recipe.model";
 import { RecipeService } from "./../recipe.service";
 import { Component, OnInit, Input } from "@angular/core";
@@ -15,7 +16,8 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private shoppingListService: ShoppingListService
   ) {}
 
   ngOnInit() {

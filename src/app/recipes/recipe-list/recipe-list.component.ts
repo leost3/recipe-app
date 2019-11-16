@@ -1,3 +1,4 @@
+import { ShoppingListService } from "./../../shopping-list/shopping-list.service";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { RecipeService } from "../recipe.service";
