@@ -3,8 +3,16 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit">Save</button>
-          <button class="btn btn-success" type="button">Cancel</button>
+          <button
+            [disabled]="!recipeForm.valid"
+            class="btn btn-success"
+            type="submit"
+          >
+            Save
+          </button>
+          <button class="btn btn-success" type="button" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
       <div class="row">
@@ -24,6 +32,7 @@
               id="imagePath"
               type="text"
               class="form-control"
+              #imagePath
             />
           </div>
         </div>
@@ -31,7 +40,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <img src="" alt="" class="img-responsive" />
+            <img [src]="imagePath.value" alt="" class="img-responsive" />
           </div>
         </div>
       </div>
@@ -53,6 +62,7 @@
           <div
             class="row"
             [formGroupName]="i"
+            style="margin-top: 10px;"
             *ngFor="
               let ingredientControl of recipeForm.get('ingredients').controls;
               let i = index
@@ -69,8 +79,26 @@
               />
             </div>
             <div class="col-xs-2">
-              <button class="btn btn-danger">X</button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onRemoveIngredient(i)"
+              >
+                X
+              </button>
             </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-xs-12">
+            <button
+              class="btn btn-primary"
+              (click)="onAddNewIngredient()"
+              type="button"
+            >
+              Add new Ingredint
+            </button>
           </div>
         </div>
       </div>
