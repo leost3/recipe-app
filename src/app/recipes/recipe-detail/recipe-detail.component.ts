@@ -31,6 +31,7 @@ export class RecipeDetailComponent implements OnInit {
       // const selectedRrecipe = this.recipeService.getRecipes().find(recipe => {
       //   return recipe.id === this.id;
       this.recipe = this.recipeService.getRecipe(this.id);
+      console.log(this.recipe);
     });
   }
 

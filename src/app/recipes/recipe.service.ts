@@ -11,18 +11,18 @@ export class RecipeService {
   sendIngredientsToShoppingList = new EventEmitter<Ingredient[]>();
   editedRecipe = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
-    new Recipe(
-      "Tasty veggie stuff",
-      "delicious green thing",
-      "https://images.unsplash.com/photo-1468777675496-5782faaea55b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80",
-      [new Ingredient("tomatoes", 20), new Ingredient("potatoes", 5)]
-    ),
-    new Recipe(
-      "Super Bacon Burger",
-      "Tasty baconator mega burger",
-      "https://images.unsplash.com/photo-1547584370-2cc98b8b8dc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80",
-      [new Ingredient("bacon", 10), new Ingredient("chicken", 5)]
-    )
+    // new Recipe(
+    //   "Tasty veggie stuff",
+    //   "delicious green thing",
+    //   "https://images.unsplash.com/photo-1468777675496-5782faaea55b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80",
+    //   [new Ingredient("tomatoes", 20), new Ingredient("potatoes", 5)]
+    // ),
+    // new Recipe(
+    //   "Super Bacon Burger",
+    //   "Tasty baconator mega burger",
+    //   "https://images.unsplash.com/photo-1547584370-2cc98b8b8dc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80",
+    //   [new Ingredient("bacon", 10), new Ingredient("chicken", 5)]
+    // )
   ];
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -50,6 +50,11 @@ export class RecipeService {
 
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
+    this.editedRecipe.next([...this.recipes]);
+  }
+
+  loadRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
     this.editedRecipe.next([...this.recipes]);
   }
 }

@@ -1,3 +1,5 @@
+import { RecipesResolverService } from "./../recipes-resolver.service";
+import { DataStorageService } from "./../../shared/data-storage.service";
 import { Subscription } from "rxjs";
 import { ShoppingListService } from "./../../shopping-list/shopping-list.service";
 import { Router } from "@angular/router";
@@ -22,18 +24,27 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
   subscription: Subscription;
   constructor(
+    private dataStorage: DataStorageService,
+    private dataStorageService: DataStorageService,
     private recipeService: RecipeService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
+    // this.recipes = this.recipeService.getRecipes();
+    this.dataStorage.fetchRecipes().subscribe((recipes: Recipe[]) => {
+      this.recipes = recipes;
+    });
+
     this.subscription = this.recipeService.editedRecipe.subscribe(
       (recipe: Recipe[]) => {
         this.recipes = recipe;
+        console.log(this.recipes);
       }
     );
+
+    // this.dataStorageService.fetchRecipes();
   }
 
   onNewRecipe() {
