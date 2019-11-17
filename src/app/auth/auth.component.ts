@@ -1,3 +1,5 @@
+import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService, AuthResponseData } from "./auth.service";
 import { NgForm } from "@angular/forms";
@@ -9,7 +11,11 @@ import { Component, OnInit, ViewChild } from "@angular/core";
   styleUrls: ["./auth.component.css"]
 })
 export class AuthComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   @ViewChild("authForm", { static: false }) form: NgForm;
   isLoginMode = true;
@@ -38,6 +44,7 @@ export class AuthComponent implements OnInit {
     authObs.subscribe(
       resData => {
         console.log(resData);
+        this.router.navigate(["/"]);
         this.isLoading = false;
       },
       errorMessage => {
