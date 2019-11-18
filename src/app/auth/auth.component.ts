@@ -18,6 +18,9 @@ export class AuthComponent implements OnInit {
   ) {}
 
   @ViewChild("authForm", { static: false }) form: NgForm;
+
+  defaultEmail = "leost3@gmail.com";
+  defaultPassword = "123123";
   isLoginMode = true;
   isLoading = false;
   error: string = null;

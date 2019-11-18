@@ -1,6 +1,12 @@
+import { User } from "./../auth/user.model";
 import { Recipe } from "./recipe.model";
 import { RecipeService } from "./recipe.service";
 import { Component, OnInit } from "@angular/core";
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from "@angular/router";
 
 @Component({
   selector: "app-recipes",

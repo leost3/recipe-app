@@ -14,6 +14,7 @@
           name="email"
           required
           email
+          [(ngModel)]="defaultEmail"
         />
       </div>
       <div class="form-group">
@@ -26,6 +27,8 @@
           name="password"
           required
           minlength="6"
+          value="123123"
+          [(ngModel)]="defaultPassword"
         />
       </div>
       <div>
