@@ -1,8 +1,9 @@
+import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 import { AuthGuardService as AuthGuard } from "./auth-guard.service";
 import { ShoppingListService } from "./shopping-list/shopping-list.service";
 import { RecipeService } from "./recipes/recipe.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { ShoppingListEditComponent } from "./shopping-list/shopping-list-edit/shopping-list-edit.component";
 import { RecipeItemComponent } from "./recipes/recipe-list/recipe-item/recipe-item.component";
@@ -45,7 +46,16 @@ import { LoadSpinnerComponent } from "./shared/loading-spinner/loading-spinner.c
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [RecipeService, ShoppingListService, AuthGuard],
+  providers: [
+    RecipeService,
+    ShoppingListService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
